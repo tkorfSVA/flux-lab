@@ -2,28 +2,45 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: prod-paymentserver
-  namespace: default
+  namespace: flux-system
 spec:
+  dependsOn: 
+    - name: infrastucture-apps
   interval: 5m
-  path: "./apps/base/"
+  path: "./apps/base"
   prune: true
   sourceRef:
-    kind: HelmRepository
-    name: oci-mablab
+    kind: GitRepository
+    name: flux-system
   validation: client
-  healthChecks:
-  - apiVersion: helm.toolkit.fluxcd.io/v1beta1
-    kind: HelmRelease
-    name: base-paymentserver
-    namespace: default
-  patchesStrategicMerge:
-  - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-    kind: HelmRelease
-    metadata:
-      name: prod-paymentserver
-      namespace: default
-    spec:
-      values:
-        image:
-          repository: httpd
-          tag: latest
+
+
+# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+# kind: Kustomization
+# metadata:
+#   name: prod-paymentserver
+#   namespace: default
+# spec:
+#   interval: 5m
+#   path: "./apps/base/"
+#   prune: true
+#   sourceRef:
+#     kind: OCIRepository 
+#     name: oci-mablab
+#   validation: client
+  # healthChecks:
+  # - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+  #   kind: HelmRelease
+  #   name: base-paymentserver
+  #   namespace: default
+  # patchesStrategicMerge:
+  # - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+  #   kind: HelmRelease
+  #   metadata:
+  #     name: prod-paymentserver
+  #     namespace: default
+  #   spec:
+  #     values:
+  #       image:
+  #         repository: httpd
+  #         tag: latest

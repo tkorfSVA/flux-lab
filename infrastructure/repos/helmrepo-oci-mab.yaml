@@ -7,3 +7,5 @@ spec:
   type: "oci"
   interval: 5m0s
   url: oci://mablab.azurecr.io/charts
+  secretRef:
+    name: oci-mablab-creds

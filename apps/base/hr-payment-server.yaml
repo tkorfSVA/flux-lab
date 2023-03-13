@@ -11,10 +11,20 @@ spec:
       version: 0.1.0
       sourceRef:
         kind: HelmRepository
-        name: mablab-oci
+        name: oci-mablab
         namespace: flux-system
       interval: 1m
   values:
     image:
       repository: nginx
-      tag: stable
+      tag: latest
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+       enabled: false
