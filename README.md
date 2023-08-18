@@ -1,1 +1,1 @@
-Sample flux gitops repo
+A Flux repo
