@@ -5,8 +5,6 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: prod
-  dependsOn: 
-    - name: infrastucture-configs
   interval: 5m
   path: "./apps/base"
   prune: true
@@ -17,7 +15,7 @@ spec:
   healthChecks:
   - apiVersion: helm.toolkit.fluxcd.io/v1beta1
     kind: HelmRelease
-    name: paymentserver
+    name: nginx
     namespace: prod
   patches:
     - patch: |-
@@ -28,6 +26,4 @@ spec:
           namespace: prod 
         spec:
           values:
-            image:
-              repository: nginx
-              tag: 1.21.0 
+            replicaCount: 3

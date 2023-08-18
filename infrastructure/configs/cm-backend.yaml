@@ -5,3 +5,4 @@ metadata:
   namespace: default
 data:
   username: foo
+  password: pass!23?
