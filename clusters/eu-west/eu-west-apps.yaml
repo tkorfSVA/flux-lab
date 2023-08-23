@@ -1,13 +1,14 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: staging-apps
+  name: eu-west-apps
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure
   interval: 5m
-  path: "./apps/staging"
+  path: "./apps/eu-west"
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  validation: client

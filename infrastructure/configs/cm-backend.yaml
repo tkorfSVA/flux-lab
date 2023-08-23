@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: dummy-cm
-  namespace: default
-data:
-  username: foo
-  password: pass!23?
