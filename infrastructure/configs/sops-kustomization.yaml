@@ -10,7 +10,7 @@ spec:
       name: sops-age
   force: false
   interval: 10m0s
-  path: ./infrastructure/configs
+  path: ./apps/
   prune: true
   sourceRef:
     kind: GitRepository
