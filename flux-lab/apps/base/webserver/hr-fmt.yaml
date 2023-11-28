@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: fmt-webserver
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: sample-app
+      version: 1.1.3
+      sourceRef:
+        kind: HelmRepository
+        name: fmt-helmrepo
+        namespace: flux-system
+      interval: 1m
+  values:
+    image:
+      repository: publicoci.azurecr.io/apps/sample-app
+      tag: sha-2e4e7d6
+    service:
+      port: 8090
+    env_map:
+    - name: REGION
+      value: "WEST CAPE"
