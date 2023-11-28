@@ -1,0 +1,29 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: fmt-west-eu
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: "./apps/base/webserver"
+  prune: true
+  targetNamespace: qa-team
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  patches:
+    - patch: |-
+        apiVersion: helm.toolkit.fluxcd.io/v2beta1
+        kind: HelmRelease
+        metadata:
+          name: fmt-webserver
+          namespace: default
+        spec:
+          values:
+            env_map:
+            - name: REGION
+              value: "EAST CAPE"
+            replicaCount: 1
+
+
